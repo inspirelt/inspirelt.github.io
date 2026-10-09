@@ -1,471 +1,250 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tao Lu</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: white;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-
-        .header {
-            padding: 40px;
-            background: white;
-            color: #333;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .profile-section {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            margin-bottom: 20px;
-        }
-
-        .profile-image {
-            width: 200px;
-            height: 250px;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .profile-info h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
-
-        .chinese-name {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .contact-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .email-image {
-            height: 32px;
-            opacity: 1;
-        }
-
-        .links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .links a {
-            color: #4a90e2;
-            text-decoration: none;
-            padding: 8px 16px;
-            border: 2px solid #4a90e2;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-        }
-
-        .links a:hover {
-            background: #4a90e2;
-            color: white;
-        }
-
-        .content {
-            padding: 40px;
-            position: relative;
-        }
-
-        .bio {
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            color: #555;
-            text-align: justify;
-            padding-left: 15px;
-            border-left: 4px solid #e9ecef;
-        }
-
-        .section-title {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 30px;
-            font-weight: 300;
-            position: relative;
-            padding-bottom: 10px;
-            padding-left: 15px;
-            border-left: 4px solid #4a90e2;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 15px;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-            border-radius: 2px;
-        }
-
-        .publication {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-            border-radius: 8px;
-            border: 1px solid #f0f0f0;
-            border-left: 4px solid #4a90e2;
-            box-shadow: 0 2px 12px rgba(74, 144, 226, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-left 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .publication::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.05), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .publication:hover::before {
-            left: 100%;
-        }
-
-        .publication:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.15);
-            border-left: 6px solid #357abd;
-        }
-
-        .publication-title {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 8px;
-            font-weight: 500;
-            line-height: 1.4;
-            position: relative;
-            transition: color 0.2s ease;
-        }
-
-        .publication:hover .publication-title {
-            color: #2c3e50;
-        }
-
-        .publication-authors {
-            color: #666;
-            margin-bottom: 8px;
-            font-size: 0.95em;
-        }
-
-        .publication-venue {
-            color: #444;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .publication-venue .highlight {
-            color: #4a90e2;
-            font-weight: 600;
-        }
-
-        .publication-links {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .publication-links a {
-            color: #4a90e2;
-            text-decoration: none;
-            font-size: 0.9em;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .publication-links a:hover {
-            background: #4a90e2;
-            color: white;
-        }
-
-        .activities {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-            border-radius: 8px;
-            border: 1px solid #f0f0f0;
-            border-left: 4px solid #4a90e2;
-            box-shadow: 0 2px 12px rgba(74, 144, 226, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-left 0.2s ease;
-        }
-
-        .activities:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.12);
-            border-left: 6px solid #357abd;
-        }
-
-        .activities h2 {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 400;
-        }
-
-        .activities li {
-            margin-bottom: 10px;
-            color: #555;
-            font-size: 0.95em;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #888;
-            font-size: 0.85em;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .footer a {
-            color: #4a90e2;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .profile-info h1 {
-                font-size: 2em;
-            }
-            
-            .links {
-                justify-content: center;
-            }
-            
-            .publication-links {
-                justify-content: center;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tao Lu · 鲁涛</title>
+  <meta name="description" content="Tao Lu (鲁涛) is a researcher working on 3D vision, world models and embodied AI — from point clouds and 3D Gaussian Splatting to robots that learn from video.">
+  <meta name="author" content="Tao Lu">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tao Lu · 鲁涛">
+  <meta property="og:description" content="Researcher in 3D vision, world models and embodied AI.">
+  <meta property="og:url" content="https://inspirelt.github.io/">
+  <meta property="og:image" content="https://inspirelt.github.io/assets/img/portrait.jpg">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12152a" media="(prefers-color-scheme: dark)">
+  <script>
+    // Apply the saved theme before first paint, and flag JS for progressive enhancement.
+    (function () {
+      var d = document.documentElement;
+      d.classList.add("js");
+      try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") d.dataset.theme = t; } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonts load without blocking render; system fonts are used until (or if) they arrive. -->
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500&text=%E9%B2%81%E6%B6%9B&display=swap">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="profile-section">
-                <img src="assets/lutao2023.png" alt="Tao Lu" class="profile-image">
-                <div class="profile-info">
-                    <h1>Tao Lu</h1>
-                    <div class="chinese-name">鲁涛</div>
-                    <div class="contact-info">
-                        <img src="assets/email.png" alt="Email" class="email-image">
-                    </div>
-                    <div class="links">
-                        <a href="https://scholar.google.com/citations?user=Ch28NiIAAAAJ&hl=en" target="_blank">Google Scholar</a>
-                        <a href="assets/TaoLu_CV.pdf" target="_blank">CV</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <a class="skip" href="#main">Skip to content</a>
 
-        <div class="content">
-            <div class="bio">
-                I'm a postdoc at Brown University, advised by <a href="https://cs.brown.edu/people/ssrinath/" style="color: #4a90e2;">Srinath Sridhar</a>. I received my PhD from Nanjing University in 2023, supervised by <a href="https://mcg.nju.edu.cn/member/gswu/index.html" style="color: #4a90e2;">Prof. Gangshan Wu</a> and <a href="https://wanglimin.github.io/" style="color: #4a90e2;">Prof. Limin Wang</a>. My research focuses on perceiving and understanding the 3D world through both semantic and geometric approaches. Before coming to Brown, I was engaged in research on general and user-friendly novel view rendering methods at the Shanghai AI Lab. My long-term goal is to integrate these insights and methods to develop a more powerful 3D content creation system to facilitate the interaction in a virtual world.
-                <br><br>
-                <strong>I am currently seeking opportunities for research scientist positions in industry or academia. Feel free to reach out if you are interested in collaboration or have exciting opportunities to discuss!</strong>
-            </div>
-
-            <h2 class="section-title">Publications</h2>
-            
-            <div class="publication">
-                <div class="publication-title">AnySplat: Feed-forward 3D Gaussian Splatting from Unconstrained Views</div>
-                <div class="publication-authors">Lihan Jiang*, Yucheng Mao*, Linning Xu, <strong>Tao Lu</strong>, Kerui Ren, Yichen Jin, Xudong Xu, Mulin Yu, Jiangmiao Pang, Feng Zhao, Dahua Lin, and Bo Dai</div>
-                <div class="publication-venue">arxiv, 2025</div>
-                <div class="publication-links">
-                    <a href="https://city-super.github.io/anysplat/" target="_blank">Project page</a>
-                    <a href="https://arxiv.org/pdf/2505.23716?" target="_blank">arXiv</a>
-                    <a href="https://github.com/OpenRobotLab/AnySplat" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">Horizon-GS: Unified 3D Gaussian Splatting for Large-Scale Aerial-to-Ground Scenes</div>
-                <div class="publication-authors">Lihan Jiang*, Kerui Ren*, Mulin Yu, Linning Xu, Junting Dong, <strong>Tao Lu</strong>, Feng Zhao, Dahua Lin, and Bo Dai</div>
-                <div class="publication-venue"><span class="highlight">CVPR</span>, 2025</div>
-                <div class="publication-links">
-                    <a href="https://city-super.github.io/horizon-gs/" target="_blank">Project page</a>
-                    <a href="https://arxiv.org/pdf/2412.01745" target="_blank">arXiv</a>
-                    <a href="https://github.com/OpenRobotLab/HorizonGS" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">Proc-GS: Procedural building generation for city assembly with 3D Gaussians</div>
-                <div class="publication-authors">Yixuan Li, Xingjian Ran, Linning Xu, <strong>Tao Lu</strong>, Mulin Yu, Zhenzhi Wang, Yuanbo Xiangli, Dahua Lin, and Bo Dai</div>
-                <div class="publication-venue"><span class="highlight">CVPR</span>, 2025 (workshop)</div>
-                <div class="publication-links">
-                    <a href="https://city-super.github.io/procgs/" target="_blank">Project page</a>
-                    <a href="https://arxiv.org/abs/2412.07660" target="_blank">arXiv</a>
-                    <a href="https://github.com/city-super/ProcGS/" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">Art3D: Training-Free 3D Generation from Flat-Colored Illustration</div>
-                <div class="publication-authors">Xiaoyan Cong, Jiayi Shen, Zekun Li, Rao Fu, <strong>Tao Lu</strong>, Srinath Sridhar</div>
-                <div class="publication-venue"><span class="highlight">CVPR</span>, 2025 (workshop)</div>
-                <div class="publication-links">
-                    <a href="https://joy-jy11.github.io/" target="_blank">Project page</a>
-                    <a href="https://arxiv.org/pdf/2504.10466" target="_blank">arXiv</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">Octree-GS: Towards Consistent Real-time Rendering with LOD-Structured 3D Gaussians</div>
-                <div class="publication-authors">Kerui Ren*, Lihan Jiang*, <strong>Tao Lu</strong>, Mulin Yu, Linning Xu and Bo Dai†</div>
-                <div class="publication-venue"><span class="highlight">TPAMI</span>, to appear</div>
-                <div class="publication-links">
-                    <a href="https://city-super.github.io/octree-gs/" target="_blank">Project page</a>
-                    <a href="https://arxiv.org/abs/2403.17898" target="_blank">arXiv</a>
-                    <a href="https://github.com/city-super/Octree-GS" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">MixRF: Universal Mixed Radiance Fields with Points and Rays Aggregation</div>
-                <div class="publication-authors">Haiyang Bai, <strong>Tao Lu</strong>, Jiaqi Zhu, Wei Huang, Chang Gou, Jie Guo, Lijun Chen, Yanwen Guo</div>
-                <div class="publication-venue"><span class="highlight">TVCG</span></div>
-                <div class="publication-links">
-                    <a href="https://ieeexplore.ieee.org/document/11007514" target="_blank">Paper</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">GSDF: 3DGS Meets SDF for Improved Rendering and Reconstruction</div>
-                <div class="publication-authors">Mulin Yu*, <strong>Tao Lu</strong>*, Linning Xu, Lihan Jiang, Yuanbo Xiangli†, and Bo Dai</div>
-                <div class="publication-venue"><span class="highlight">NeurIPS</span>, 2024</div>
-                <div class="publication-links">
-                    <a href="https://city-super.github.io/GSDF/" target="_blank">Project page</a>
-                    <a href="https://arxiv.org/abs/2403.16964" target="_blank">arXiv</a>
-                    <a href="https://github.com/city-super/GSDF" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">Scaffold-GS: Structured 3D Gaussians for View-Adaptive Rendering</div>
-                <div class="publication-authors"><strong>Tao Lu</strong>*, Mulin Yu*, Linning Xu, Yuanbo Xiangli, Limin Wang, Dahua Lin and Bo Dai†</div>
-                <div class="publication-venue"><span class="highlight">CVPR</span>, 2024, <strong>highlight</strong></div>
-                <div class="publication-links">
-                    <a href="https://city-super.github.io/scaffold-gs/" target="_blank">Project page</a>
-                    <a href="https://arxiv.org/abs/2312.00109" target="_blank">arXiv</a>
-                    <a href="https://github.com/city-super/Scaffold-GS" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">LinK: Linear Kernel for LiDAR-based 3D Perception</div>
-                <div class="publication-authors"><strong>Tao Lu</strong>, Xiang Ding, Haisong Liu, Gangshan Wu and Limin Wang†</div>
-                <div class="publication-venue"><span class="highlight">CVPR</span>, 2023</div>
-                <div class="publication-links">
-                    <a href="https://openaccess.thecvf.com/content/CVPR2023/html/Lu_LinK_Linear_Kernel_for_LiDAR-Based_3D_Perception_CVPR_2023_paper.html" target="_blank">Conference</a>
-                    <a href="https://arxiv.org/abs/2303.16094" target="_blank">arXiv</a>
-                    <a href="https://github.com/MCG-NJU/LinK" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">Learning Optical Flow and Scene Flow with Bidirectional Camera-LiDAR Fusion</div>
-                <div class="publication-authors">Haisong Liu, <strong>Tao Lu</strong>, YihuiXu, Jia Liu, and Limin Wang†</div>
-                <div class="publication-venue"><span class="highlight">TPAMI</span>, 2023, to appear</div>
-                <div class="publication-links">
-                    <a href="https://arxiv.org/pdf/2303.12017.pdf" target="_blank">arXiv</a>
-                    <a href="https://github.com/MCG-NJU/CamLiFlow" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">APP-Net: Auxiliary-Point-Based Push and Pull Operations for Efficient Point Cloud Recognition</div>
-                <div class="publication-authors"><strong>Tao Lu</strong>, Chunxu Liu, Youxin Chen, Gangshan Wu and Limin Wang†</div>
-                <div class="publication-venue"><span class="highlight">TIP</span>, 2023</div>
-                <div class="publication-links">
-                    <a href="https://arxiv.org/abs/2205.00847" target="_blank">arXiv</a>
-                    <a href="https://github.com/MCG-NJU/APP-Net" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">SparseBEV: High-Performance Sparse 3D Object Detection from Multi-Camera Videos</div>
-                <div class="publication-authors">Haisong Liu, Teng Yao, <strong>Tao Lu</strong>, Haiguang Wang, Limin Wang†</div>
-                <div class="publication-venue"><span class="highlight">ICCV</span>, 2023</div>
-                <div class="publication-links">
-                    <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Liu_SparseBEV_High-Performance_Sparse_3D_Object_Detection_from_Multi-Camera_Videos_ICCV_2023_paper.pdf" target="_blank">Conference</a>
-                    <a href="https://arxiv.org/abs/2308.09244" target="_blank">arXiv</a>
-                    <a href="https://github.com/MCG-NJU/SparseBEV" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">CamLiFlow: Bidirectional camera-LiDAR fusion for joint optical flow and scene flow estimation</div>
-                <div class="publication-authors">Haisong Liu, <strong>Tao Lu</strong>, Yihui Xu, Jia Liu, Wenjie Li, Lijun Chen</div>
-                <div class="publication-venue"><span class="highlight">CVPR</span>, 2022, <strong>(Oral)</strong></div>
-                <div class="publication-links">
-                    <a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Liu_CamLiFlow_Bidirectional_Camera-LiDAR_Fusion_for_Joint_Optical_Flow_and_Scene_CVPR_2022_paper.pdf" target="_blank">Conference</a>
-                    <a href="https://arxiv.org/abs/2111.10502" target="_blank">arXiv</a>
-                    <a href="https://github.com/MCG-NJU/CamLiFlow" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="publication">
-                <div class="publication-title">CGA-Net: Category Guided Aggregation for Point Cloud Semantic Segmentation</div>
-                <div class="publication-authors"><strong>Tao Lu</strong>, Limin Wang† and Gangshan Wu</div>
-                <div class="publication-venue"><span class="highlight">CVPR</span>, 2021</div>
-                <div class="publication-links">
-                    <a href="https://openaccess.thecvf.com/content/CVPR2021/html/Lu_CGA-Net_Category_Guided_Aggregation_for_Point_Cloud_Semantic_Segmentation_CVPR_2021_paper.html" target="_blank">Conference</a>
-                    <a href="https://github.com/MCG-NJU/CGA-Net" target="_blank">Code</a>
-                </div>
-            </div>
-
-            <div class="activities">
-                <h2>Activities</h2>
-                <ul>
-                    <li><strong>Reviewer</strong>: CVPR, ICCV, ECCV, NeurIPS, SIGGRAPH Asia, AAAI, TPAMI, IJCV...</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer">
-            Designed by claude-4-sonnet.
-        </div>
+  <!-- ─────────────────────────── Nav ─────────────────────────── -->
+  <header class="nav" data-nav>
+    <div class="wrap nav__inner">
+      <a class="brand" href="#top" aria-label="Tao Lu — back to top">
+        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">Tao Lu</span>
+      </a>
+      <nav class="nav__links" aria-label="Sections">
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"/></svg>
+      </button>
     </div>
+  </header>
+
+  <main id="main">
+    <!-- ─────────────────────────── Hero ─────────────────────────── -->
+    <section class="hero wrap" id="top">
+      <div class="hero__text">
+        <p class="eyebrow" data-reveal><span class="live" aria-hidden="true"></span>Researcher · 3D Vision &amp; Embodied AI</p>
+
+        <h1 class="hero__name" data-reveal>
+          <span class="hero__en">Tao Lu</span><span class="hero__cn" lang="zh-CN">鲁涛</span>
+        </h1>
+
+        <p class="hero__lead" data-reveal>
+          I study how machines
+          <a class="verb" href="#perceive" data-verb="points" style="--c: var(--perc)">perceive</a>,
+          <a class="verb" href="#reconstruct" data-verb="refit" style="--c: var(--recon)">reconstruct</a>, and
+          <a class="verb" href="#act" data-verb="ripple" style="--c: var(--emb)">act</a>
+          in the 3D world.
+        </p>
+
+        <p class="hero__bio" data-reveal>
+          These days I work on embodied world models — teaching robots from human video, rebuilding real scenes as
+          interactive gyms, and world action models that predict before they act. Earlier, I worked on point clouds
+          and LiDAR during my PhD at Nanjing University, then on 3D Gaussian Splatting (Scaffold-GS, Octree-GS, GSDF)
+          at Shanghai AI Lab and as a postdoc at Brown University.
+        </p>
+
+        <div class="hero__links" data-reveal>
+          <button class="btn btn--primary" type="button" data-email data-u="lt.taolu" data-d="gmail.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
+            <span>Email</span>
+          </button>
+          <a class="btn" href="https://scholar.google.com/citations?user=Ch28NiIAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="fill"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zM5.8 13.2v4L12 21l6.2-3.8v-4L12 16.5l-6.2-3.3z"/></svg>
+            <span>Scholar</span>
+          </a>
+          <a class="btn" href="https://github.com/inspirelt" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="fill"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a class="btn" href="assets/TaoLu_CV.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+            <span>CV</span>
+          </a>
+        </div>
+
+        <p class="latest" data-reveal>
+          <span class="latest__tag">New</span>
+          <span class="latest__text">
+            <a href="#pub-real2gym" data-jump="real2gym">Real2Gym</a>,
+            <a href="#pub-internw0" data-jump="internw0">InternW0-Δ</a>,
+            <a href="#pub-infinihand" data-jump="infinihand">InfiniHand</a> and
+            <a href="#pub-geoverse" data-jump="geoverse">GeoVerse</a> are out on arXiv.
+          </span>
+        </p>
+      </div>
+
+      <figure class="portrait" data-portrait data-reveal>
+        <div class="portrait__stage" data-stage>
+          <img class="portrait__img" src="assets/img/portrait.jpg" alt="Portrait of Tao Lu" width="689" height="886" decoding="async">
+          <canvas class="portrait__photo" aria-hidden="true"></canvas>
+          <canvas class="portrait__gl" aria-hidden="true"></canvas>
+          <span class="bbox" aria-hidden="true"><i></i><i></i><i></i><i></i><b class="bbox__label">person <span data-conf>0.99</span></b></span>
+        </div>
+        <figcaption class="portrait__hud">
+          <span class="hud__stat" data-hud>fig. 1 — me, in Gaussians</span>
+          <span class="hud__controls">
+            <span class="seg" role="group" aria-label="Render the portrait as">
+              <button type="button" data-mode="points" aria-pressed="false">points</button>
+              <button type="button" data-mode="gaussians" aria-pressed="true">splats</button>
+              <button type="button" data-mode="photo" aria-pressed="false">photo</button>
+            </span>
+            <button class="icon-btn icon-btn--sm" type="button" data-replay aria-label="Replay the Gaussian fitting" title="Re-fit">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4.5h-4.5"/></svg>
+            </button>
+          </span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ─────────────────────────── Research ─────────────────────────── -->
+    <section class="section wrap" id="research" aria-labelledby="research-title">
+      <header class="section__head" data-reveal>
+        <p class="kicker"><span>01</span> Research</p>
+        <h2 class="section__title" id="research-title">From points to <em>worlds</em>.</h2>
+        <p class="section__sub">One thread runs through my work: giving machines a 3D understanding of the world that is good enough to act on.</p>
+      </header>
+
+      <ol class="arc">
+        <li class="arc__card" id="perceive" style="--c: var(--perc)" data-reveal>
+          <div class="arc__viz">
+            <canvas data-viz="lidar" aria-label="Animated LiDAR scan"></canvas>
+            <span class="arc__hint">move to orbit</span>
+          </div>
+          <div class="arc__body">
+            <p class="arc__meta"><span>01</span><span>2018 — 2023</span></p>
+            <h3 class="arc__title">Perceive</h3>
+            <p class="arc__desc">Learning directly from point clouds and LiDAR — efficient point backbones, large kernels at linear cost, and camera–LiDAR fusion for flow and detection.</p>
+            <p class="arc__works">
+              <a href="#pub-cga-net" data-jump="cga-net">CGA-Net</a>
+              <a href="#pub-camliflow" data-jump="camliflow">CamLiFlow</a>
+              <a href="#pub-link" data-jump="link">LinK</a>
+              <a href="#pub-sparsebev" data-jump="sparsebev">SparseBEV</a>
+            </p>
+            <button class="arc__more" type="button" data-filter-jump="perception">All 3D perception papers <span aria-hidden="true">→</span></button>
+          </div>
+        </li>
+
+        <li class="arc__card" id="reconstruct" style="--c: var(--recon)" data-reveal>
+          <div class="arc__viz">
+            <canvas data-viz="splats" aria-label="Animated cloud of 3D Gaussians around anchor points"></canvas>
+            <span class="arc__hint">hover for anchors</span>
+          </div>
+          <div class="arc__body">
+            <p class="arc__meta"><span>02</span><span>2023 — now</span></p>
+            <h3 class="arc__title">Reconstruct</h3>
+            <p class="arc__desc">Structured 3D Gaussians for real-time, view-adaptive rendering — anchors, levels of detail, SDF coupling, and feed-forward splatting from unposed images.</p>
+            <p class="arc__works">
+              <a href="#pub-scaffold-gs" data-jump="scaffold-gs">Scaffold-GS</a>
+              <a href="#pub-octree-gs" data-jump="octree-gs">Octree-GS</a>
+              <a href="#pub-gsdf" data-jump="gsdf">GSDF</a>
+              <a href="#pub-anysplat" data-jump="anysplat">AnySplat</a>
+            </p>
+            <button class="arc__more" type="button" data-filter-jump="recon">All reconstruction papers <span aria-hidden="true">→</span></button>
+          </div>
+        </li>
+
+        <li class="arc__card" id="act" style="--c: var(--emb)" data-reveal>
+          <div class="arc__viz">
+            <canvas data-viz="arm" aria-label="Animated robot arm predicting and executing a pick-and-place"></canvas>
+            <span class="arc__hint">click to set a goal</span>
+          </div>
+          <div class="arc__body">
+            <p class="arc__meta"><span>03</span><span>2025 — now</span></p>
+            <h3 class="arc__title">Act</h3>
+            <p class="arc__desc">World models that predict, then act — robot skills from egocentric human video, real-to-sim gyms built from videos, and large-scale world action models.</p>
+            <p class="arc__works">
+              <a href="#pub-internw0" data-jump="internw0">InternW0-Δ</a>
+              <a href="#pub-real2gym" data-jump="real2gym">Real2Gym</a>
+              <a href="#pub-skel-wam" data-jump="skel-wam">Skel-WAM</a>
+              <a href="#pub-infinihand" data-jump="infinihand">InfiniHand</a>
+            </p>
+            <button class="arc__more" type="button" data-filter-jump="embodied">All world-model papers <span aria-hidden="true">→</span></button>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ─────────────────────────── Publications ─────────────────────────── -->
+    <section class="section wrap" id="publications" aria-labelledby="pubs-title">
+      <header class="section__head section__head--row" data-reveal>
+        <div>
+          <p class="kicker"><span>02</span> Publications</p>
+          <h2 class="section__title" id="pubs-title">Papers</h2>
+        </div>
+        <p class="section__note">* equal contribution &nbsp;·&nbsp; † corresponding<br>Full list on <a href="https://scholar.google.com/citations?user=Ch28NiIAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></p>
+      </header>
+
+      <div class="filters" role="toolbar" aria-label="Filter papers" data-filters data-reveal></div>
+      <div class="pubs" data-pubs aria-live="polite"></div>
+      <noscript><p class="section__sub">Enable JavaScript to see the publication list, or visit <a href="https://scholar.google.com/citations?user=Ch28NiIAAAAJ&amp;hl=en">Google Scholar</a>.</p></noscript>
+    </section>
+
+    <!-- ─────────────────────────── Contact ─────────────────────────── -->
+    <section class="contact wrap" id="contact" aria-labelledby="contact-title">
+      <div class="contact__inner" data-reveal>
+        <span class="contact__glow" aria-hidden="true"></span>
+        <p class="kicker"><span>03</span> Contact</p>
+        <h2 class="contact__title" id="contact-title">Say <em>hello</em>.</h2>
+        <p class="contact__text">Always happy to talk about 3D vision, world models and robot learning — or about working together.</p>
+        <div class="contact__actions">
+          <button class="btn btn--primary btn--lg" type="button" data-email data-u="lt.taolu" data-d="gmail.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
+            <span data-email-text>lt.taolu [at] gmail [dot] com</span>
+            <span class="btn__hint">click to copy</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <span>© <span data-year>2026</span> Tao Lu · Designed by <a href="https://claude.ai">Claude</a></span>
+    <span class="footer__mid">The portrait above is drawn live with <span data-gcount>a few thousand</span> 2D Gaussians.</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/portrait.js" defer></script>
+  <script src="assets/js/arc.js" defer></script>
 </body>
 </html>
